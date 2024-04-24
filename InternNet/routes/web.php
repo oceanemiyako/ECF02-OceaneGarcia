@@ -8,8 +8,11 @@ Route::get('/', [InternshipOpportunityController::class, 'index'])->name('intern
 Route::get('/internship/{id}', [InternshipOpportunityController::class, 'show'])->name('internship.show')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/create', [InternshipOpportunityController::class, 'create'])->name('internship.create');
+Route::get('/create', [InternshipOpportunityController::class, 'create'])->name('internship.create');
 Route::post('/internship', [InternshipOpportunityController::class, 'store'])->name('internship.store');
+Route::get('/internship/{id}/edit', [InternshipOpportunityController::class, 'edit'])->name('internship.edit');
+Route::put('/internship/{id}', [InternshipOpportunityController::class, 'update'])->name('internship.update');
+Route::delete('/internship/{id}', [InternshipOpportunityController::class, 'destroy'])->name('internship.destroy');
 });
 
 Route::middleware(['guest'])->group(function () {
@@ -23,12 +26,9 @@ Route::get('/internship/{id}', [InternshipOpportunityController::class, 'show'])
 
 Route::get('/create', [InternshipOpportunityController::class, 'create'])->name('internship.create');
 Route::post('/internship/store', [InternshipOpportunityController::class, 'store'])->name('internship.store');
-
-
-Route::get('/test', function () {
-    return 'Test';
-});
-
+Route::get('/internship/{id}/edit', [InternshipOpportunityController::class, 'edit'])->name('internship.edit');
+Route::put('/internship/{id}', [InternshipOpportunityController::class, 'update'])->name('internship.update');
+Route::delete('/internship/{id}', [InternshipOpportunityController::class, 'destroy'])->name('internship.destroy');
 
 
 require __DIR__.'/auth.php';

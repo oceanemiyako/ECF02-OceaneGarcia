@@ -1,0 +1,94 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.card {
+    background-color: darkgrey;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin: 0 auto;
+    max-width: 600px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    margin-right: 10px;
+}
+
+.button-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-actions .btn {
+    margin-right: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border-radius: 6px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    width: 100%;
+}
+
+label {
+    font-weight: bold;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.navbar {
+    background-color: darkgray;
+    padding: 20px 0;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-nav {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.nav-item {
+    margin-left: 20px;
+    list-style: none;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333333;
+}
+
+.nav-link:hover {
+    color: #555555;
+}
+
+.title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+}

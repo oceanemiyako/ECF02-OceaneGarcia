@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    <link rel="stylesheet"  href="{{ asset('css/style.css') }}">
+
     <div class="container">
         <h2>Créer une Offre de Stage</h2>
         <form method="POST" action="{{ route('internship.store') }}">
