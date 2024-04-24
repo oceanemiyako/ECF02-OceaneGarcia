@@ -1,50 +1,52 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+
+
+
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
-    public function create(): View
+
+    public function create()
     {
-        return view('auth.register');
+        return view('auth.register-company');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|confirmed|min:8',
+            'company_name' => 'required|string|max:255',
+            'company_description' => 'required|string',
+            'company_localisation' => 'required|string|max:255',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => bcrypt($request->password),
         ]);
 
-        event(new Registered($user));
+        $company = $user->createCompany([
+            'name' => $request->company_name,
+            'description' => $request->company_description,
+            'localisation' => $request->company_localisation,
+        ]);
 
-        Auth::login($user);
+        if ($user->company_id !== null) {
+            return redirect()->route('login')->with('success', 'Votre entreprise a été enregistrée avec succès. Veuillez vous connecter.');
+        }
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('register.company')->with('error', 'Une erreur s\'est produite lors de l\'enregistrement de l\'entreprise. Veuillez réessayer.');
     }
+
+
+
+
 }
